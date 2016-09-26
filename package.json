@@ -1,0 +1,18 @@
+{
+  "name": "digenti-tiles",
+  "version": "1.0.0",
+  "description": "DIGENTI Tile Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@jorditost",
+  "license": "ISC",
+  "repository": "https://github.com/FH-Potsdam/digenti-tiles",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mbtiles": "^0.9.0",
+    "sqlite3": "^3.1.4",
+    "tilelive": "^5.12.2"
+  }
+}

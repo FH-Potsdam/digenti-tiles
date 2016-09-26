@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "sources": {
+    "ndvi_gradient": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:10060/v2/tiles/{z}/{x}/{y}.pbf"
+      ],
+      "minzoom": 9,
+      "maxzoom": 16
+    }
+  },
+  "layers": [{
+    "id": "background",
+    "type": "background",
+    "paint": {
+      "background-color": "#ffa"
+    }
+  },{
+    "id": "FOS",
+    "type": "line",
+    "source": "ndvi_gradient",
+    "source-layer": "ndvi_gradient",
+    "layout": {
+      "line-join":"round"
+    },
+    "paint": {
+      "line-color": "red",
+      "line-width": 5,
+      "line-opacity": {
+        "stops": [[0,0],[1,0.1]]
+      }
+    }
+  }]
+}
