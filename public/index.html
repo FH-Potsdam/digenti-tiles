@@ -4,18 +4,75 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+
     <style>
-        body { margin:0; padding:0; }
+
+        * { margin:0; padding:0; }
+
+        body {
+            font: 14px Arial;
+        }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+
+        .modal {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+
+            padding: 20px;
+            background: white;
+        }
+
+        .range-wrapper {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .range-wrapper label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .range-wrapper input {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .range-wrapper span {
+            display: block;
+        }
     </style>
 </head>
 <body>
 
 <div id='map'></div>
 
+<div class="modal">
+
+    <h2>Special Areas</h2>
+    <div class="range-wrapper">
+        <label for="ndvi-slider">Vegetation Density</label>
+        <input id="ndvi-slider" name="ndvi-slider" type="range" min="1" max="4" value="1" step="1" />
+        <span id="ndvi-text"></span>
+    </div>
+
+    <div class="range-wrapper">
+        <label for="gradient-slider">Hillslope Gradient</label>
+        <input id="gradient-slider" name="gradient-slider" type="range" min="1" max="6" value="1" step="1" />
+        <span id="gradient-text"></span>
+    </div>
+</div>
+
 <script>
+
+var ndviValues = ['Low Vegetation', 'Medium-Low Vegetation', 'Medium-High Vegetation', 'High Vegetation'];
+var gradientValues = ['0° < gradient =< 5°', '5° < gradient =< 10°', '10° < gradient =< 15°', '15° < gradient =< 20°', '20° < gradient =< 25°', '25° < gradient =< 30°'];
+
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGl0b3N0IiwiYSI6ImQtcVkyclEifQ.vwKrOGZoZSj3N-9MB6FF_A';
 var map = new mapboxgl.Map({
     container: 'map',
@@ -44,26 +101,19 @@ map.on('load', function () {
         "type": "fill",
         "source": "ndvi_gradient",
         "source-layer": "ndvi_gradient",
-        // "filter": ["==", "NDVI", 1],
-        "filter": [
-          "all",
-          ["==", "NDVI", 1],
-          ["==", "GRADIENT", 1]
-        ],
+        // "filter": [
+        //   "all",
+        //   ["==", "NDVI", 1], // 1-4
+        //   ["==", "GRADIENT", 1] // 1-6
+        // ],
         "paint": {
-            "fill-color": "#c74d4d",
+            "fill-color": "#27bf9a",
             "fill-opacity": 0.5
         }
-        // "layout": {
-        //     "line-join": "round",
-        //     "line-cap": "round"
-        // },
-        // "paint": {
-        //     "line-color": "#c74d4d",
-        //     "line-width": 2,
-        //     "line-opacity": 0.15
-        // }
     });
+
+
+    updateSpecialAreas();
 
 
     /////////
@@ -133,6 +183,73 @@ map.on('load', function () {
     //     }
     // });
 });
+
+/////////////
+// jQuery
+/////////////
+
+var $ndviSlider,
+    $ndviText,
+    ndviValue,
+    $gradientSlider,
+    $gradientText,
+    gradientValue;
+
+
+/////////////
+// onReady
+/////////////
+
+function updateSpecialAreas() {
+
+    console.log("update special areas - ndvi: " + ndviValue + ", gradient: " + gradientValue);
+
+    map.setFilter('ndvi_gradient',
+        [
+          "all",
+          ["==", "NDVI", ndviValue], // 1-4
+          ["==", "GRADIENT", gradientValue] // 1-6
+        ]
+    );
+}
+
+
+$( document ).ready(function() {
+
+    console.log("ready");
+
+    // NDVI
+    $ndviSlider = $('#ndvi-slider');
+    ndviValue = parseInt($ndviSlider.val(), 10);
+    $ndviText = $('#ndvi-text');
+    $ndviText.text(ndviValue + " // " + ndviValues[ndviValue-1]);
+
+    // Gradient
+    $gradientSlider = $('#gradient-slider');
+    gradientValue = parseInt($gradientSlider.val(), 10);
+    $gradientText = $('#gradient-text');
+    $gradientText.text(gradientValue + " // " + gradientValues[gradientValue-1]);
+
+    // Check range change
+    $('input[type="range"]').on('input', function(e) {
+
+        // Change NDVI
+        if ($ndviSlider[0] == this) {
+
+            ndviValue = parseInt($ndviSlider.val(), 10);
+            $ndviText.text(ndviValue + " // " + ndviValues[ndviValue-1]);
+
+        // Change Gradient
+        } else if ($gradientSlider[0] == this) {
+
+            gradientValue = parseInt($gradientSlider.val(), 10);
+            $gradientText.text(gradientValue + " // " + gradientValues[gradientValue-1]);
+        }
+
+        updateSpecialAreas();
+    });
+});
+
 </script>
 
 </body>
