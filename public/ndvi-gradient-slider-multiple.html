@@ -110,7 +110,7 @@
 <div id='map'></div>
 
 <div class="modal">
-
+    <h1>DIGENTI</h1>
     <h2>Special Areas</h2>
     <div class="range-wrapper">
         <label for="ndvi-slider">Vegetation Density</label>
@@ -158,11 +158,20 @@ map.on('load', function () {
     map.addSource('ndvi_gradient', {
         "type": "vector",
         "tiles": [
-          "http://localhost:10060/v2/tiles/{z}/{x}/{y}.pbf"
+          "http://tostnik.deneb.uberspace.de/digenti-tiles/v2/tiles/{z}/{x}/{y}.pbf"
         ],
         "minzoom": 9,
         "maxzoom": 16
     });
+
+    // map.addSource('ndvi_gradient', {
+    //     "type": "vector",
+    //     "tiles": [
+    //       "http://localhost:61001/v2/tiles/{z}/{x}/{y}.pbf"
+    //     ],
+    //     "minzoom": 9,
+    //     "maxzoom": 16
+    // });
 
     map.addLayer({
         "id": "ndvi_gradient",
@@ -218,7 +227,7 @@ function filterSpecialAreas() {
     var minGrads = (gradientValue1 == 1) ? 0 : gradientValues[gradientValue1-2];
 
     $gradientText.text(minGrads + " - " + gradientValues[gradientValue2-1] + " degrees");
-    
+
     // if (gradientValue1 == gradientValue2) {
     //     if (gradientValue1 != 1) {
     //         minGrads = gradientValues[gradientValue2-2]

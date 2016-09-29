@@ -52,7 +52,7 @@
 <div id='map'></div>
 
 <div class="modal">
-
+    <h1>DIGENTI</h1>
     <h2>Special Areas</h2>
     <div class="range-wrapper">
         <label for="ndvi-slider">Vegetation Density</label>
@@ -90,11 +90,20 @@ map.on('load', function () {
     map.addSource('ndvi_gradient', {
         "type": "vector",
         "tiles": [
-          "http://localhost:10060/v2/tiles/{z}/{x}/{y}.pbf"
+          "http://tostnik.deneb.uberspace.de/digenti-tiles/v2/tiles/{z}/{x}/{y}.pbf"
         ],
         "minzoom": 9,
         "maxzoom": 16
     });
+    
+    // map.addSource('ndvi_gradient', {
+    //     "type": "vector",
+    //     "tiles": [
+    //       "http://localhost:61001/v2/tiles/{z}/{x}/{y}.pbf"
+    //     ],
+    //     "minzoom": 9,
+    //     "maxzoom": 16
+    // });
 
     map.addLayer({
         "id": "ndvi_gradient",
@@ -123,7 +132,7 @@ map.on('load', function () {
     // map.addSource('colombia-fos', {
     //     "type": "vector",
     //     "tiles": [
-    //       "http://localhost:10060/v2/tiles/{z}/{x}/{y}.pbf"
+    //       "http://localhost:61001/v2/tiles/{z}/{x}/{y}.pbf"
     //     ],
     //     "minzoom": 6,
     //     "maxzoom": 16
