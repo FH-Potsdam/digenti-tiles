@@ -5,7 +5,7 @@
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -95,7 +95,7 @@ map.on('load', function () {
         "minzoom": 9,
         "maxzoom": 16
     });
-    
+
     // map.addSource('ndvi_gradient', {
     //     "type": "vector",
     //     "tiles": [
@@ -110,87 +110,13 @@ map.on('load', function () {
         "type": "fill",
         "source": "ndvi_gradient",
         "source-layer": "ndvi_gradient",
-        // "filter": [
-        //   "all",
-        //   ["==", "NDVI", 1], // 1-4
-        //   ["==", "GRADIENT", 1] // 1-6
-        // ],
         "paint": {
             "fill-color": "#27bf9a",
             "fill-opacity": 0.5
         }
     });
 
-
     updateSpecialAreas();
-
-
-    /////////
-    // FOS
-    /////////
-
-    // map.addSource('colombia-fos', {
-    //     "type": "vector",
-    //     "tiles": [
-    //       "http://localhost:61001/v2/tiles/{z}/{x}/{y}.pbf"
-    //     ],
-    //     "minzoom": 6,
-    //     "maxzoom": 16
-    // });
-    //
-    // // map.addSource('colombia-fos', {
-    // //     type: 'vector',
-    // //     url: 'mapbox://jorditost.49a7b9e1'
-    // // });
-    //
-    // map.addLayer({
-    //     "id": "fos3",
-    //     "type": "line",
-    //     "source": "colombia-fos",
-    //     "source-layer": "colombia_fos_h1_m0_5_CLASSIFIED_wgs84",
-    //     "filter": ["==", "elev", 3],
-    //     "layout": {
-    //         "line-join": "round",
-    //         "line-cap": "round"
-    //     },
-    //     "paint": {
-    //         "line-color": "#e6dc51",
-    //         "line-width": 2,
-    //         "line-opacity": 0.15
-    //     }
-    // });
-    // map.addLayer({
-    //     "id": "fos2",
-    //     "type": "line",
-    //     "source": "colombia-fos",
-    //     "source-layer": "colombia_fos_h1_m0_5_CLASSIFIED_wgs84",
-    //     "filter": ["==", "elev", 2],
-    //     "layout": {
-    //         "line-join": "round",
-    //         "line-cap": "round"
-    //     },
-    //     "paint": {
-    //         "line-color": "#d9943f",
-    //         "line-width": 2,
-    //         "line-opacity": 0.15
-    //     }
-    // });
-    // map.addLayer({
-    //     "id": "fos1",
-    //     "type": "line",
-    //     "source": "colombia-fos",
-    //     "source-layer": "colombia_fos_h1_m0_5_CLASSIFIED_wgs84",
-    //     "filter": ["==", "elev", 1],
-    //     "layout": {
-    //         "line-join": "round",
-    //         "line-cap": "round"
-    //     },
-    //     "paint": {
-    //         "line-color": "#c74d4d",
-    //         "line-width": 2,
-    //         "line-opacity": 0.15
-    //     }
-    // });
 });
 
 /////////////

@@ -5,7 +5,7 @@
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -38,15 +38,6 @@
             display: block;
             margin-bottom: 8px;
         }
-
-        /*.range-wrapper input {
-            margin-top: 8px;
-            margin-bottom: 8px;
-        }
-
-        .range-wrapper span {
-            display: block;
-        }*/
 
         section.range-slider {
             position: relative;
@@ -119,8 +110,6 @@
             <input value="4" min="1" max="4" step="1" type="range">
             <span class="range-values"></span>
         </section>
-        <!-- <input id="ndvi-slider" name="ndvi-slider" type="range" min="1" max="4" value="1" step="1" /> -->
-        <!-- <span id="ndvi-text"></span> -->
     </div>
 
     <div class="range-wrapper">
@@ -130,8 +119,6 @@
             <input value="6" min="1" max="6" step="1" type="range">
             <span class="range-values"></span>
         </section>
-        <!-- <input id="gradient-slider" name="gradient-slider" type="range" min="1" max="6" value="1" step="1" />
-        <span id="gradient-text"></span> -->
     </div>
 </div>
 
@@ -163,15 +150,6 @@ map.on('load', function () {
         "minzoom": 9,
         "maxzoom": 16
     });
-
-    // map.addSource('ndvi_gradient', {
-    //     "type": "vector",
-    //     "tiles": [
-    //       "http://localhost:61001/v2/tiles/{z}/{x}/{y}.pbf"
-    //     ],
-    //     "minzoom": 9,
-    //     "maxzoom": 16
-    // });
 
     map.addLayer({
         "id": "ndvi_gradient",
@@ -227,15 +205,6 @@ function filterSpecialAreas() {
     var minGrads = (gradientValue1 == 1) ? 0 : gradientValues[gradientValue1-2];
 
     $gradientText.text(minGrads + " - " + gradientValues[gradientValue2-1] + " degrees");
-
-    // if (gradientValue1 == gradientValue2) {
-    //     if (gradientValue1 != 1) {
-    //         minGrads = gradientValues[gradientValue2-2]
-    //     }
-    //     $gradientText.text(minGrads + " - " + gradientValues[gradientValue2-1] + " degrees");
-    // } else {
-    //     $gradientText.text(minGrads + " - " + gradientValues[gradientValue2-1] + " degrees");
-    // }
 }
 
 
@@ -291,52 +260,6 @@ $( document ).ready(function() {
         });
     });
 });
-
-// function getVals(){
-//     // Get slider values
-//     var parent = this.parentNode;
-//     var slides = parent.getElementsByTagName("input");
-//     var slide1 = parseFloat( slides[0].value );
-//     var slide2 = parseFloat( slides[1].value );
-//     // Neither slider will clip the other, so make sure we determine which is larger
-//     if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
-//
-//     var displayElement = parent.getElementsByClassName("rangeValues")[0];
-//     displayElement.innerHTML = slide1 + " - " + slide2;
-// }
-//
-// function initRangeSliders() {
-//     // NDVI
-//     $ndviSlider = $('#ndvi-slider');
-//     ndviValue = parseInt($ndviSlider.val(), 10);
-//     $ndviText = $('#ndvi-text');
-//     $ndviText.text(ndviValue + " // " + ndviValues[ndviValue-1]);
-//
-//     // Gradient
-//     $gradientSlider = $('#gradient-slider');
-//     gradientValue = parseInt($gradientSlider.val(), 10);
-//     $gradientText = $('#gradient-text');
-//     $gradientText.text(gradientValue + " // " + gradientValues[gradientValue-1]);
-//
-//     // Check range change
-//     $('input[type="range"]').on('input', function(e) {
-//
-//         // Change NDVI
-//         if ($ndviSlider[0] == this) {
-//
-//             ndviValue = parseInt($ndviSlider.val(), 10);
-//             $ndviText.text(ndviValue + " // " + ndviValues[ndviValue-1]);
-//
-//         // Change Gradient
-//         } else if ($gradientSlider[0] == this) {
-//
-//             gradientValue = parseInt($gradientSlider.val(), 10);
-//             $gradientText.text(gradientValue + " // " + gradientValues[gradientValue-1]);
-//         }
-//
-//         filterSpecialAreas();
-//     });
-// }
 
 </script>
 
