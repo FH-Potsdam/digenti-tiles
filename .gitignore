@@ -1,13 +1,12 @@
 /node_modules/
 *.DS_Store
 /tiles/
+/doc/
 
 *.codekit
 
 config.codekit
 
 *.codekit
-
-config.js
 
 config.js
